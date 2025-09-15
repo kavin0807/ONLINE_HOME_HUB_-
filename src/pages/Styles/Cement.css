@@ -1,0 +1,2 @@
+/* Cement page uses the same styles as Windows for consistency. If you want to customize, copy this file as Cement.css and adjust. */
+@import './Windows.css';

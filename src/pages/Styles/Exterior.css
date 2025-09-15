@@ -1,0 +1,376 @@
+/* Combined Product and Exterior Product Styles */
+
+/* --- General Page Styles --- */
+.products-page, .exterior-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f7f3f0 0%, #ede7e0 100%);
+  font-family: 'Segoe UI', Arial, sans-serif;
+  position: relative;
+}
+
+.products-page::before, .exterior-page::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(218,195,175,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+  opacity: 0.18;
+  background-size: cover;
+}
+
+/* --- Navigation Bar Styles (shared) --- */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(247, 243, 240, 0.95);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  transition: all 0.3s ease;
+  padding: 0.75rem 0;
+  height: 80px;
+  border-bottom: 1px solid rgba(218, 195, 175, 0.2);
+}
+
+.navbar.scrolled {
+  background: rgba(247, 243, 240, 0.98);
+  box-shadow: 0 2px 20px rgba(61, 47, 38, 0.1);
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.logo-image {
+  height: 80px;
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.logo-image:hover {
+  transform: scale(1.1);
+}
+
+.nav-menu {
+  display: flex;
+  gap: 2rem;
+  margin-left: auto;
+  padding-right: 20px;
+}
+
+.nav-menu button {
+  background: none;
+  border: none;
+  color: #3d2f26;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.nav-menu button:hover {
+  background: #3d2f26;
+  color: #f7f3f0;
+  transform: translateY(-2px);
+}
+
+.nav-menu .nav-link {
+  background: none !important;
+  border: none !important;
+  color: #3d2f26 !important;
+  font-weight: 500 !important;
+  cursor: pointer;
+  padding: 0.5rem 1rem !important;
+  border-radius: 8px !important;
+  transition: all 0.3s ease !important;
+  font-size: 1rem !important;
+  text-decoration: none !important;
+  display: inline-block;
+}
+
+.nav-menu .nav-link:hover {
+  background: #3d2f26 !important;
+  color: #f7f3f0 !important;
+  transform: translateY(-2px) !important;
+  text-decoration: none !important;
+}
+
+.nav-menu .nav-link:visited {
+  color: #3d2f26 !important;
+  background: none !important;
+}
+
+.nav-menu .nav-link:visited:hover {
+  color: #f7f3f0 !important;
+  background: #3d2f26 !important;
+}
+
+.nav-menu .nav-link:active {
+  color: #3d2f26 !important;
+  background: none !important;
+}
+
+.nav-menu .nav-link:focus {
+  color: #3d2f26 !important;
+  background: none !important;
+  outline: none !important;
+}
+
+/* --- Hero Section Styles (shared) --- */
+.products-hero, .product-hero {
+  background: linear-gradient(135deg, #f7f3f0 0%, #f0ebe5 50%, #ede7e0 100%);
+  color: #3d2f26;
+  padding: 140px 0 100px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.products-hero::before, .product-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(218,195,175,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+  opacity: 0.18;
+  z-index: 1;
+  background-size: cover;
+}
+
+.products-hero > *, .product-hero > * {
+  position: relative;
+  z-index: 2;
+}
+
+.products-hero h1, .product-hero h1 {
+  font-size: 2.7rem;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  color: #3d2f26;
+}
+
+.products-hero p, .product-hero p {
+  font-size: 1.2rem;
+  color: #6b5b4f;
+  margin-bottom: 0;
+}
+
+.breadcrumb {
+  margin-bottom: 1rem;
+  color: #64748b;
+  font-size: 1rem;
+}
+
+/* --- Product/Category Grid Styles (shared) --- */
+.products-section, .product-categories {
+  padding: 60px 0 40px;
+}
+
+.products-grid, .categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 2.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.product-item, .category-card, .product-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(61, 47, 38, 0.08);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+}
+
+.product-item:hover, .category-card:hover, .product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(61, 47, 38, 0.13);
+}
+
+.product-image {
+  background: #ede7e0;
+  width: 220px;
+  height: 160px;
+  border-radius: 16px;
+  border: 1px solid #dac3af;
+  margin: 2.5rem auto 1.2rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+}
+
+.product-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.product-item:hover .product-img {
+  transform: scale(1.05);
+}
+
+.product-emoji {
+  font-size: 2.5rem;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #64748b;
+}
+
+.product-content {
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-content h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 0.7rem;
+}
+
+.product-brand {
+  font-size: 1rem;
+  color: #7c3aed;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.product-content p {
+  color: #64748b;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+  font-size: 1rem;
+}
+
+.product-price {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #2563eb;
+  margin-bottom: 1rem;
+  padding: 0.4rem 1rem;
+  background: #eff6ff;
+  border-radius: 8px;
+  display: inline-block;
+}
+
+.product-features, .category-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.2rem 0;
+}
+
+.product-features li, .category-card li {
+  padding: 0.4rem 0;
+  color: #475569;
+  position: relative;
+  padding-left: 1.3rem;
+  font-size: 0.98rem;
+}
+
+.product-features li::before, .category-card li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #2563eb;
+  font-weight: bold;
+}
+
+
+.btn-primary {
+  background: linear-gradient(90deg, #2563eb 0%, #7c3aed 100%);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 0.8rem 2rem;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-top: 1.2rem;
+  box-shadow: 0 2px 8px rgba(44,62,80,0.09);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(90deg, #7c3aed 0%, #2563eb 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.13);
+}
+
+.footer {
+  background: linear-gradient(135deg, #3d2f26 0%, #2d1f18 100%);
+  color: #f7f3f0;
+  padding: 2rem 0;
+  text-align: center;
+  border-top: 1px solid rgba(218, 195, 175, 0.2);
+  margin-top: 40px;
+}
+
+@media (max-width: 900px) {
+  .products-grid, .categories-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .product-hero, .products-hero {
+    padding: 120px 0 60px;
+  }
+}
+
+@media (max-width: 600px) {
+  .product-hero h1, .products-hero h1 {
+    font-size: 2rem;
+  }
+  .product-content {
+    padding: 1.2rem 0.7rem 1rem 0.7rem;
+  }
+  .products-section, .product-categories {
+    padding: 40px 0 20px;
+  }
+  .footer {
+    padding: 1rem 0;
+  }
+}

@@ -1,0 +1,80 @@
+/* EngineerProfile color overrides: neutral, high-contrast palette */
+
+:root {
+  --ep-bg-soft: #faf8f5;
+  --ep-card-bg: #ffffff;
+  --ep-border: #e6dfd7;
+  --ep-border-hover: #d3bfa6;
+  --ep-text-dark: #2f241d;
+  --ep-text-muted: #6b5b4f;
+  --ep-brand: #3d2f26;
+}
+
+/* Page background */
+.engineer-profile-page { background: var(--ep-bg-soft) !important; }
+
+/* Header text */
+.profile-info h1 { color: var(--ep-text-dark) !important; text-shadow: none; }
+.profile-title, .rating-text, .profile-location, .info-label { color: var(--ep-text-muted) !important; }
+.info-value { color: var(--ep-text-dark) !important; }
+
+/* Quick info bar */
+.quick-info-bar { background: var(--ep-bg-soft) !important; border: 1px solid var(--ep-border) !important; }
+
+/* Buttons */
+.profile-actions .btn-primary {
+  background: var(--ep-brand) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 15px rgba(61,47,38,0.20) !important;
+}
+.profile-actions .btn-primary:hover {
+  box-shadow: 0 6px 20px rgba(61,47,38,0.30) !important;
+}
+.profile-actions .btn-secondary {
+  background: #fff !important;
+  color: var(--ep-brand) !important;
+  border: 2px solid var(--ep-brand) !important;
+}
+.profile-actions .btn-secondary:hover {
+  background: var(--ep-brand) !important;
+  color: #fff !important;
+}
+
+/* Tabs */
+.profile-tabs { background: #fff !important; }
+.tab { color: var(--ep-text-muted) !important; }
+.tab:hover { color: var(--ep-text-dark) !important; background: #f7f3f0 !important; }
+.tab.active {
+  background: transparent !important;
+  color: var(--ep-text-dark) !important;
+  box-shadow: none !important;
+}
+.tab.active::after { background: var(--ep-brand) !important; }
+
+/* Cards */
+.overview-card, .experience-card, .projects-card, .contact-card {
+  background: var(--ep-card-bg) !important;
+  border-color: var(--ep-border) !important;
+  box-shadow: 0 2px 12px rgba(61,47,38,0.08) !important;
+}
+.overview-card:hover, .experience-card:hover, .projects-card:hover, .contact-card:hover {
+  border-color: var(--ep-border-hover) !important;
+  box-shadow: 0 12px 36px rgba(61,47,38,0.16) !important;
+}
+
+/* Headings and text inside cards */
+.overview-card h3, .project-item h4, .contact-info p { color: var(--ep-text-dark) !important; }
+
+/* Tags */
+.specialty-tag, .certification-tag, .language-tag, .skill-tag {
+  background: #fff !important;
+  color: var(--ep-text-dark) !important;
+  border: 1px solid var(--ep-border) !important;
+  box-shadow: none !important;
+}
+
+/* Project items */
+.project-item:hover {
+  border-color: var(--ep-border-hover) !important;
+  box-shadow: 0 4px 15px rgba(61,47,38,0.12) !important;
+}

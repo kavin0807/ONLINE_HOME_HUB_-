@@ -1,0 +1,181 @@
+/* Portfolio-like styling enhancements for EngineerProfile (inspired by Unsection portfolio grids) */
+
+/* Section headers */
+.portfolio-section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 8px 0 18px 0;
+}
+
+.portfolio-section-title h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  color: #1f1f1f;
+}
+
+.portfolio-section-title .hint {
+  color: #7a746b;
+  font-size: 0.95rem;
+}
+
+/* Card grid look */
+.portfolio-grid,
+.overview-grid,
+.experience-grid,
+.projects-grid,
+.contact-grid {
+  gap: 20px !important;
+}
+
+/* Card look and hover like portfolio tiles */
+.portfolio-card,
+.overview-card,
+.experience-card,
+.projects-card,
+.contact-card {
+  border: 1px solid #e8e4dd;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.portfolio-card:hover,
+.overview-card:hover,
+.experience-card:hover,
+.projects-card:hover,
+.contact-card:hover {
+  transform: translateY(-4px);
+  border-color: #d9d1c5;
+  box-shadow: 0 14px 36px rgba(0,0,0,0.08);
+}
+
+/* Portfolio tile grid for Projects tab */
+.portfolio-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.portfolio-tile {
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  min-height: 160px;
+  background: #f5f2ec;
+  border: 1px solid #ece6dc;
+  cursor: pointer;
+  isolation: isolate;
+}
+
+/* Subtle noise/gradient background */
+.portfolio-tile .tile-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 120% at 0% 0%, #faf7f2 0%, #f1ebe3 50%, #ebe4db 100%);
+  transition: transform 0.5s ease;
+  z-index: 0;
+}
+
+/* Overlay content */
+.portfolio-tile .tile-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 6px;
+  padding: 16px;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,0.5) 100%);
+  color: #fff;
+  z-index: 1;
+  opacity: 0.92;
+  transition: opacity 0.25s ease;
+}
+
+.tile-title {
+  margin: 0;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.tile-cta {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+/* Hover effects */
+.portfolio-tile:hover .tile-bg { transform: scale(1.06); }
+.portfolio-tile:hover .tile-overlay { opacity: 1; }
+
+/* Portfolio badges */
+.skill-tag,
+.certification-tag,
+.language-tag,
+.specialty-tag {
+  background: #f7f4ef !important;
+  color: #3d3329 !important;
+  border: 1px solid #e8e0d4;
+}
+
+/* Tabs to minimal portfolio look */
+.profile-tabs .tabs .tab {
+  border: 1px solid transparent;
+}
+.profile-tabs .tabs .tab.active {
+  background: #1f1f1f;
+  color: #fff !important;
+  border-color: #1f1f1f;
+}
+.profile-tabs .tabs .tab:hover {
+  background: #f3efe9;
+  color: #1f1f1f !important;
+}
+
+/* Header adjustments for a portfolio hero */
+.profile-header {
+  background: #fff;
+  border-bottom: 1px solid #eee7de;
+}
+.profile-intro .profile-title {
+  color: #6d6358;
+}
+
+/* CTA buttons, minimalist */
+.profile-actions .btn-primary {
+  background: #1f1f1f !important;
+  color: #fff !important;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+}
+.profile-actions .btn-primary:hover {
+  transform: translateY(-2px);
+}
+.profile-actions .btn-secondary {
+  background: #fff !important;
+  color: #1f1f1f !important;
+  border: 1px solid #e8e0d4 !important;
+}
+.profile-actions .btn-secondary:hover {
+  background: #f7f4ef !important;
+}
+
+/* Quick info bar — make it subtle */
+.quick-info-bar {
+  background: #fbf9f6 !important;
+  border: 1px solid #eee7de !important;
+}
+.info-label { color: #6d6358 !important; }
+.info-value { color: #2a2a2a !important; }
+
+/* Section paddings */
+.profile-content { padding-top: 0.5rem; }
+
+/* Optional: small tag for counts */
+.small-muted {
+  color: #928a80;
+  font-size: 0.9rem;
+}

@@ -1,0 +1,75 @@
+/* Humaan-like Section Reveal layout (light theme, sticky left titles + mask reveal) */
+
+.section-reveal {
+  background: #ffffff;
+}
+
+/* Two-column rows */
+.sr-row {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 32px;
+  padding: 64px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+/* Sticky left title column */
+.sr-sticky {
+  position: sticky;
+  top: 96px; /* below navbar */
+  align-self: start;
+}
+
+.sr-sticky h2 {
+  margin: 0 0 8px 0;
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #151515;
+}
+
+.sr-sub {
+  margin: 0;
+  color: #6f6f6f;
+}
+
+/* Right content column */
+.sr-content {
+  display: grid;
+  gap: 16px;
+}
+
+/* Cards that reveal */
+.sr-card {
+  background: #fff;
+  border: 1px solid #ececec;
+  border-radius: 16px;
+  padding: 20px 22px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+  overflow: hidden; /* needed for mask/clip */
+}
+
+.sr-card h3 {
+  margin-top: 0;
+}
+
+/* Mask reveal effect: start clipped, then wipe down */
+.reveal-on-scroll {
+  /* Use CSS clip-path to mimic a mask wipe */
+  clip-path: inset(20% 0 20% 0 round 12px);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: clip-path 700ms ease, opacity 500ms ease, transform 600ms ease;
+}
+
+.reveal-on-scroll.is-revealed {
+  clip-path: inset(0 0 0 0 round 12px);
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+  .sr-row { grid-template-columns: 1fr; }
+  .sr-sticky { position: static; }
+}

@@ -1,0 +1,126 @@
+/* HomeRedesign.css - Inspired by Wix Construction Template */
+
+.home-main {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #f7f7f7;
+  color: #222;
+}
+
+.home-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  background: rgba(30, 30, 30, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  height: 72px;
+  z-index: 100;
+}
+
+.home-navbar .logo {
+  height: 48px;
+}
+
+.home-navbar .nav-links {
+  display: flex;
+  gap: 32px;
+}
+
+.home-navbar .nav-link {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+}
+.home-navbar .nav-link:hover {
+  color: #ffd600;
+}
+
+.home-hero {
+  min-height: 90vh;
+  background: linear-gradient(rgba(30,30,30,0.7), rgba(30,30,30,0.5)), url('/images/HOME!.png') center/cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0 10vw;
+  color: #fff;
+  position: relative;
+}
+
+.home-hero-title {
+  font-size: 3.2rem;
+  font-weight: 800;
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+}
+
+.home-hero-desc {
+  font-size: 1.3rem;
+  margin-bottom: 32px;
+  max-width: 520px;
+}
+
+.home-hero-btns {
+  display: flex;
+  gap: 24px;
+}
+
+.home-btn-primary {
+  background: #ffd600;
+  color: #222;
+  border: none;
+  padding: 14px 36px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  transition: background 0.2s;
+}
+.home-btn-primary:hover {
+  background: #ffe066;
+}
+
+.home-btn-secondary {
+  background: transparent;
+  color: #fff;
+  border: 2px solid #ffd600;
+  padding: 14px 36px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.home-btn-secondary:hover {
+  background: #ffd600;
+  color: #222;
+}
+
+@media (max-width: 900px) {
+  .home-hero {
+    padding: 0 4vw;
+  }
+  .home-navbar {
+    padding: 0 12px;
+  }
+}
+@media (max-width: 600px) {
+  .home-hero-title {
+    font-size: 2rem;
+  }
+  .home-hero-desc {
+    font-size: 1rem;
+  }
+  .home-navbar {
+    height: 56px;
+  }
+  .home-navbar .logo {
+    height: 32px;
+  }
+}

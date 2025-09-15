@@ -1,0 +1,26 @@
+/* ExteriorPaint page uses the same styles as NTRoofs for consistency. If you want to customize, copy this file as ExteriorPaint.css and adjust. */
+@import './NTRoofs.css';
+
+.color-options {
+  margin: 1rem 0 0.5rem 0;
+}
+.color-select {
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #bbb;
+  font-size: 1rem;
+  background: #f8f8f8;
+  margin-left: 0.5rem;
+}
+
+.color-picker-input {
+  margin-left: 0.5rem;
+  border: none;
+  background: none;
+  width: 2.2rem;
+  height: 2.2rem;
+  cursor: pointer;
+  vertical-align: middle;
+  box-shadow: 0 0 0 1.5px #bbb;
+  border-radius: 8px;
+}

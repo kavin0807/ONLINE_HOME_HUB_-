@@ -1,0 +1,97 @@
+/* Trionn-like CTA Section Reveal (light theme) */
+
+/* Layout */
+.cta-section {
+  background: #ffffff;
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.cta-row {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 32px;
+  padding: 72px 0;
+}
+
+/* Sticky left column */
+.cta-sticky {
+  position: sticky;
+  top: 96px; /* account for navbar */
+  align-self: start;
+}
+
+.cta-sticky h2 {
+  margin: 0 0 10px 0;
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #141414;
+}
+
+.cta-sub {
+  margin: 0;
+  color: #6f6f6f;
+}
+
+/* Right content */
+.cta-content {
+  display: grid;
+  gap: 16px;
+}
+
+/* Cards with mask reveal */
+.cta-card {
+  background: #fff;
+  border: 1px solid #ececec;
+  border-radius: 16px;
+  padding: 22px 24px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+  overflow: hidden; /* for clip-path */
+}
+
+.cta-card h3 { margin: 0 0 8px 0; }
+.cta-card p { margin: 0 0 14px 0; color: #424242; }
+
+.cta-actions { display: flex; gap: 10px; }
+
+/* Reveal effect */
+.cta-reveal {
+  clip-path: inset(20% 0 20% 0 round 12px);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: clip-path 700ms ease, opacity 500ms ease, transform 600ms ease;
+}
+
+.cta-reveal.is-revealed {
+  clip-path: inset(0 0 0 0 round 12px);
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Buttons - Home page theme */
+.btn-primary {
+  background: #3d2f26 !important;
+  color: #f7f3f0 !important;
+  border: 2px solid #3d2f26 !important;
+  filter: none !important;
+}
+.btn-primary:hover {
+  background: #2d1f18 !important;
+  color: #f7f3f0 !important;
+}
+.btn-secondary {
+  background: #f7f3f0 !important;
+  color: #3d2f26 !important;
+  border: 2px solid #3d2f26 !important;
+}
+.btn-secondary:hover {
+  background: #3d2f26 !important;
+  color: #f7f3f0 !important;
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+  .cta-row { grid-template-columns: 1fr; }
+  .cta-sticky { position: static; }
+}

@@ -1,0 +1,66 @@
+/* Lighten expanded details for Exterior Specialists only */
+
+/* Scope to Engineers page when 'exterior' tab is active */
+.engineers-page.exterior .leadership-card {
+  background: #ffffff;
+  border-color: #e8e1d8;
+  box-shadow: 0 6px 22px rgba(61,47,38,0.08);
+}
+
+.engineers-page.exterior .leadership-card:hover {
+  border-color: #e1d7c9;
+  box-shadow: 0 12px 28px rgba(61,47,38,0.12);
+}
+
+/* Expanded details area */
+.engineers-page.exterior .leadership-card.expanded {
+  border-color: #d8c9b3;
+}
+
+.engineers-page.exterior .leadership-details {
+  background: #fbfaf8; /* subtle light panel */
+  border-top: 1px solid #eee6db;
+}
+
+.engineers-page.exterior .leadership-description {
+  color: #4a3d33; /* readable neutral */
+}
+
+.engineers-page.exterior .leadership-fields .field {
+  color: #5a4a3f;
+}
+
+.engineers-page.exterior .leadership-specialties h4,
+.engineers-page.exterior .leadership-projects h4 {
+  color: #2f281f;
+}
+
+/* Tags inside details */
+.engineers-page.exterior .specialty-tag {
+  background: #ffffff;
+  border: 1px solid #e8e1d8;
+  color: #3d2f26;
+}
+.engineers-page.exterior .specialty-tag:hover {
+  background: #faf7f3;
+  border-color: #d3bfa6;
+}
+
+/* Projects list */
+.engineers-page.exterior .leadership-projects ul { color: #5a4a3f; }
+.engineers-page.exterior .leadership-projects li::before { color: #6b5b4f; }
+
+/* Action chip remains subtle */
+.engineers-page.exterior .leadership-action .action-text {
+  background: #ffffff;
+  color: #3d2f26;
+  border: 1px solid #e8e0d4;
+}
+.engineers-page.exterior .leadership-card:hover .action-text {
+  background: #f9f6f2;
+  border-color: #d8c9b3;
+}
+.engineers-page.exterior .leadership-card.expanded .action-text {
+  background: #f7f3f0;
+  border-color: #d3bfa6;
+}
