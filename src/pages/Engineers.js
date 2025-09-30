@@ -5,6 +5,27 @@ import './Styles/EngineersLeadership.css';
 // import './Styles/EngineersLeadershipOverrides.css';
 import './Styles/EngineersExteriorLight.css';
 
+const DEFAULT_ENGINEER_IMAGE = `${process.env.PUBLIC_URL || ''}/images/products/default.jpg`;
+const EMOJI_REGEX = /[\uD800-\uDBFF][\uDC00-\uDFFF]|[\u2600-\u27BF]/;
+
+const resolveEngineerImage = (image) => {
+  if (!image || typeof image !== 'string') {
+    return DEFAULT_ENGINEER_IMAGE;
+  }
+
+  const trimmedImage = image.trim();
+
+  if (trimmedImage.startsWith('/images/')) {
+    return trimmedImage;
+  }
+
+  if (EMOJI_REGEX.test(trimmedImage)) {
+    return DEFAULT_ENGINEER_IMAGE;
+  }
+
+  return trimmedImage;
+};
+
 function Engineers() {
   // Combine all engineers into one leadership grid
   const exteriorEngineers = [
@@ -285,7 +306,11 @@ function Engineers() {
                     aria-controls={`details-${engineer.id}`}
                   >
                     <div className="leadership-avatar" aria-hidden>
-                      <span className="leadership-emoji">{engineer.image}</span>
+                      <img
+                        src={resolveEngineerImage(engineer.image)}
+                        alt={engineer.image && !EMOJI_REGEX.test(engineer.image) ? engineer.name : 'Default Avatar'}
+                        className="leadership-img"
+                      />
                     </div>
                     <div className="leadership-info">
                       <h3 className="leadership-name">{engineer.name}</h3>

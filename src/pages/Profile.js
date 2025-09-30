@@ -39,6 +39,29 @@ function Profile() {
           <div style={{ color: '#6b5b4f', fontSize: '1.05rem' }}>{user.email}</div>
         </div>
       </div>
+      {/* Profile Details Section */}
+      <div style={{ background: '#f7f3f0', borderRadius: 12, padding: '1.5rem', marginBottom: '2rem', boxShadow: '0 2px 8px rgba(44,62,80,0.07)' }}>
+        <h3 style={{ marginTop: 0, marginBottom: '1rem', color: '#3b2e2a' }}>Profile Details</h3>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+          <div><strong>Phone:</strong> {user.phone || <span style={{ color: '#b00020' }}>Not set</span>}</div>
+          <div><strong>Address:</strong> {user.address || <span style={{ color: '#b00020' }}>Not set</span>}</div>
+          <div><strong>Date of Birth:</strong> {user.dob || <span style={{ color: '#b00020' }}>Not set</span>}</div>
+          <div><strong>Gender:</strong> {user.gender || <span style={{ color: '#b00020' }}>Not set</span>}</div>
+          <div><strong>Occupation:</strong> {user.occupation || <span style={{ color: '#b00020' }}>Not set</span>}</div>
+          <div><strong>Company:</strong> {user.company || <span style={{ color: '#b00020' }}>Not set</span>}</div>
+          <div style={{ gridColumn: 'span 2' }}><strong>Bio:</strong> {user.bio || <span style={{ color: '#b00020' }}>Not set</span>}</div>
+          <div><strong>Website:</strong> {user.website || <span style={{ color: '#b00020' }}>Not set</span>}</div>
+          <div><strong>LinkedIn:</strong> {user.linkedin || <span style={{ color: '#b00020' }}>Not set</span>}</div>
+          <div><strong>Twitter:</strong> {user.twitter || <span style={{ color: '#b00020' }}>Not set</span>}</div>
+          <div><strong>Facebook:</strong> {user.facebook || <span style={{ color: '#b00020' }}>Not set</span>}</div>
+          <div><strong>Skills:</strong> {user.skills || <span style={{ color: '#b00020' }}>Not set</span>}</div>
+          <div><strong>Interests:</strong> {user.interests || <span style={{ color: '#b00020' }}>Not set</span>}</div>
+          <div><strong>Education:</strong> {user.education || <span style={{ color: '#b00020' }}>Not set</span>}</div>
+          <div><strong>Experience:</strong> {user.experience || <span style={{ color: '#b00020' }}>Not set</span>}</div>
+          <div><strong>Languages:</strong> {user.languages || <span style={{ color: '#b00020' }}>Not set</span>}</div>
+          <div><strong>Location:</strong> {user.location || <span style={{ color: '#b00020' }}>Not set</span>}</div>
+        </div>
+      </div>
       <h3 style={{ marginBottom: '1rem' }}>Purchase History</h3>
       {purchases.length === 0 ? (
         <div style={{ color: '#b00020', marginBottom: '1rem' }}>No purchases found.</div>

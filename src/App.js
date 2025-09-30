@@ -23,8 +23,10 @@ import SteelRebar from './pages/SteelRebar';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import ProductPurchase from './pages/ProductPurchase';
+import Cart from './pages/Cart';
 import Profile from './pages/Profile';
-import Admin from './pages/Admin';
+import Settings from './pages/Settings';
+// import Admin from './pages/Admin';
 
 
 // Page transition wrapper with fade/slide animations
@@ -65,8 +67,10 @@ function AnimatedRoutes() {
         <Route path="/login" element={<Page><Login /></Page>} />
         <Route path="/signup" element={<Page><Signup /></Page>} />
         <Route path="/purchase" element={<Page><ProductPurchase /></Page>} />
-        <Route path="/profile" element={<Page><Profile /></Page>} />
-        <Route path="/admin" element={<Page><Admin /></Page>} />
+  <Route path="/profile" element={<Page><Profile /></Page>} />
+  <Route path="/cart" element={<Page><Cart /></Page>} />
+  <Route path="/settings" element={<Page><Settings /></Page>} />
+        {/* <Route path="/admin" element={<Page><Admin /></Page>} /> */}
         
       </Routes>
     </AnimatePresence>

@@ -53,14 +53,28 @@
 }
 
 .leadership-avatar {
-  width: 72px;
-  height: 72px;
+  width: 88px;
+  height: 88px;
   border-radius: 50%;
-  border: 1px solid #e7e4df;
+  border: 2px solid #e7e4df;
   display: flex;
   align-items: center;
   justify-content: center;
   background: linear-gradient(180deg, #fff 0%, #faf9f7 100%);
+  overflow: hidden;
+  margin: 0 auto;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.leadership-img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  background: #fff;
+  margin: 0 auto;
+  box-shadow: none;
 }
 
 .leadership-emoji {

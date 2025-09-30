@@ -1,3 +1,7 @@
+.engineers-page {
+  padding-top: 90px;
+}
+
 .engineer-card {
   background: #fff;
   border: 2px solid #dac3af;
@@ -813,4 +817,4 @@ box-shadow: 0 2px 12px rgba(123, 79, 163, 0.08);
   .engineer-emoji {
     font-size: 2rem;
   }
-} 
+}

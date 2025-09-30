@@ -1,10 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import './Styles/EngineerProfile.css';
 import './Styles/EngineerSectionReveal.css';
 import './Styles/EngineerProfileOverrides.css';
+const DEFAULT_ENGINEER_IMAGE = `${process.env.PUBLIC_URL || ''}/images/products/default.jpg`;
+const EMOJI_REGEX = /[\uD800-\uDBFF][\uDC00-\uDFFF]|[\u2600-\u27BF]/;
+const resolveEngineerImage = (image) => {
+  if (!image || typeof image !== 'string') {
+    return DEFAULT_ENGINEER_IMAGE;
+  }
+  const trimmedImage = image.trim();
+  if (trimmedImage.startsWith('/images/')) {
+    return trimmedImage;
+  }
+  if (EMOJI_REGEX.test(trimmedImage)) {
+    return DEFAULT_ENGINEER_IMAGE;
+  }
+  return trimmedImage;
+};
 
 function EngineerProfile() {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [showMeetingModal, setShowMeetingModal] = useState(false);
   const [showPlanModal, setShowPlanModal] = useState(false);
@@ -60,7 +76,9 @@ function EngineerProfile() {
           { name: "Initial Assessment", duration: "1-2 weeks", tasks: ["Site analysis", "Soil testing", "Load calculations"] },
           { name: "Detailed Design", duration: "3-4 weeks", tasks: ["Structural modeling", "Material selection", "Safety analysis"] }
         ]
-      }
+      },
+      audioRate: "₹500/hour",
+      videoRate: "₹1500/hour",
     },
     2: {
       id: 2,
@@ -92,7 +110,9 @@ function EngineerProfile() {
           { name: "Project Initiation", duration: "1 week", tasks: ["Stakeholder analysis", "Scope definition", "Budget planning"] },
           { name: "Planning Phase", duration: "2-3 weeks", tasks: ["Detailed planning", "Risk assessment", "Resource allocation"] }
         ]
-      }
+      },
+      audioRate: "₹500/hour",
+      videoRate: "₹1500/hour",
     },
     3: {
       id: 3,
@@ -124,7 +144,9 @@ function EngineerProfile() {
           { name: "Assessment Phase", duration: "1 week", tasks: ["Current state analysis", "Gap identification", "Risk assessment"] },
           { name: "Implementation", duration: "2-4 weeks", tasks: ["Process improvement", "Training programs", "Documentation"] }
         ]
-      }
+      },
+      audioRate: "₹500/hour",
+      videoRate: "₹1500/hour",
     },
     4: {
       id: 4,
@@ -156,7 +178,9 @@ function EngineerProfile() {
           { name: "System Analysis", duration: "1 week", tasks: ["Building analysis", "Load calculations", "Energy requirements"] },
           { name: "Detailed Design", duration: "3-4 weeks", tasks: ["Mechanical design", "Electrical design", "Plumbing design"] }
         ]
-      }
+      },
+      audioRate: "₹500/hour",
+      videoRate: "₹1500/hour",
     },
     5: {
       id: 5,
@@ -188,7 +212,9 @@ function EngineerProfile() {
           { name: "Feasibility Study", duration: "2-3 weeks", tasks: ["Site investigation", "Environmental impact", "Cost-benefit analysis"] },
           { name: "Design Phase", duration: "4-6 weeks", tasks: ["Detailed engineering", "Material specifications", "Construction methods"] }
         ]
-      }
+      },
+      audioRate: "₹500/hour",
+      videoRate: "₹1500/hour",
     },
     6: {
       id: 6,
@@ -220,7 +246,9 @@ function EngineerProfile() {
           { name: "Survey & Analysis", duration: "1 week", tasks: ["Site survey", "Needs assessment", "Stakeholder meetings"] },
           { name: "Design & Implementation", duration: "3-5 weeks", tasks: ["Detailed design", "Construction supervision", "Quality control"] }
         ]
-      }
+      },
+      audioRate: "₹500/hour",
+      videoRate: "₹1500/hour",
     },
     7: {
       id: 7,
@@ -252,7 +280,9 @@ function EngineerProfile() {
           { name: "Concept Design", duration: "1 week", tasks: ["Client briefing", "Initial sketches", "Mood boards"] },
           { name: "Detailed Design", duration: "2 weeks", tasks: ["3D modeling", "Material selection", "Technical drawings"] }
         ]
-      }
+      },
+      audioRate: "₹500/hour",
+      videoRate: "₹1500/hour",
     },
     8: {
       id: 8,
@@ -284,7 +314,9 @@ function EngineerProfile() {
           { name: "System Design", duration: "1 week", tasks: ["System layout", "Load calculations", "Equipment selection"] },
           { name: "Implementation", duration: "2-3 weeks", tasks: ["Installation supervision", "Testing", "Commissioning"] }
         ]
-      }
+      },
+      audioRate: "₹500/hour",
+      videoRate: "₹1500/hour",
     },
     9: {
       id: 9,
@@ -316,7 +348,9 @@ function EngineerProfile() {
           { name: "Concept Development", duration: "1 week", tasks: ["Client meeting", "Mood boards", "Initial layouts"] },
           { name: "Execution", duration: "2 weeks", tasks: ["Material selection", "Site supervision", "Final styling"] }
         ]
-      }
+      },
+      audioRate: "₹500/hour",
+      videoRate: "₹1500/hour",
     },
     10: {
       id: 10,
@@ -348,7 +382,9 @@ function EngineerProfile() {
           { name: "Lighting Concept", duration: "1 week", tasks: ["Client consultation", "Concept sketches", "Fixture selection"] },
           { name: "Implementation", duration: "1 week", tasks: ["Installation supervision", "System programming", "Final adjustments"] }
         ]
-      }
+      },
+      audioRate: "₹500/hour",
+      videoRate: "₹1500/hour",
     },
     11: {
       id: 11,
@@ -380,7 +416,9 @@ function EngineerProfile() {
           { name: "Assessment", duration: "1 week", tasks: ["Site visit", "Acoustic measurements", "Client interview"] },
           { name: "Design & Install", duration: "2 weeks", tasks: ["System design", "Material selection", "Installation supervision"] }
         ]
-      }
+      },
+      audioRate: "₹500/hour",
+      videoRate: "₹1500/hour",
     },
     12: {
       id: 12,
@@ -412,7 +450,9 @@ function EngineerProfile() {
           { name: "Consultation", duration: "1 week", tasks: ["Client meeting", "Needs analysis", "Initial sketches"] },
           { name: "Design & Build", duration: "2 weeks", tasks: ["Material selection", "Custom cabinetry", "Installation supervision"] }
         ]
-      }
+      },
+      audioRate: "₹500/hour",
+      videoRate: "₹1500/hour",
     },
     13: {
       id: 13,
@@ -444,7 +484,9 @@ function EngineerProfile() {
           { name: "Site Investigation", duration: "1 week", tasks: ["Soil sampling", "Lab analysis", "Site survey"] },
           { name: "Foundation Design", duration: "2 weeks", tasks: ["Load calculations", "Design drawings", "Material selection"] }
         ]
-      }
+      },
+      audioRate: "₹500/hour",
+      videoRate: "₹1500/hour",
     },
     14: {
       id: 14,
@@ -476,7 +518,9 @@ function EngineerProfile() {
           { name: "Assessment & Planning", duration: "1 week", tasks: ["Site inspection", "Material selection", "Thermal analysis"] },
           { name: "Installation", duration: "1 week", tasks: ["Roof installation", "Waterproofing", "Final inspection"] }
         ]
-      }
+      },
+      audioRate: "₹500/hour",
+      videoRate: "₹1500/hour",
     }
   };
 
@@ -495,7 +539,30 @@ function EngineerProfile() {
 
   const handleMeetingBooking = (e) => {
     e.preventDefault();
-    alert(`Meeting booked with ${engineer.name}`);
+    // Collect form data
+    const form = e.target;
+    const meetingType = form.meetingType.value;
+    const date = form.querySelector('input[type="date"]').value;
+    const time = form.querySelector('select').value;
+    const projectDetails = form.querySelector('textarea').value;
+    let rate = engineer.hourlyRate;
+    if (meetingType === 'video' && engineer.videoRate) rate = engineer.videoRate;
+    if (meetingType === 'audio' && engineer.audioRate) rate = engineer.audioRate;
+
+    // Prepare meeting data
+    const meeting = {
+      engineerId: engineer.id,
+      engineerName: engineer.name,
+      engineerTitle: engineer.title,
+      engineerImage: engineer.image,
+      meetingType,
+      rate,
+      date,
+      time,
+      projectDetails,
+    };
+    // Redirect to purchase page with meeting data
+    navigate('/purchase', { state: { meeting } });
     setShowMeetingModal(false);
   };
 
@@ -525,7 +592,11 @@ function EngineerProfile() {
         <div className="container">
           <div className="profile-intro">
             <div className="profile-avatar">
-              <span className="engineer-emoji">{engineer.image}</span>
+              <img
+                src={resolveEngineerImage(engineer.image)}
+                alt={engineer.image && !EMOJI_REGEX.test(engineer.image) ? engineer.name : 'Default Avatar'}
+                className="profile-img"
+              />
             </div>
             <div className="profile-info">
               <h1>{engineer.name}</h1>
@@ -717,13 +788,19 @@ function EngineerProfile() {
               <div className="form-group">
                 <label>Meeting Type:</label>
                 <div className="meeting-type-options">
-                  <label>
+                  <label style={{display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
                     <input type="radio" name="meetingType" value="video" defaultChecked />
                     📹 Video Call
+                    <span style={{color: '#007bff', fontWeight: 500, marginLeft: '0.5rem', fontSize: '0.98rem'}}>
+                      {engineer.videoRate ? engineer.videoRate : engineer.hourlyRate}
+                    </span>
                   </label>
-                  <label>
+                  <label style={{display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
                     <input type="radio" name="meetingType" value="audio" />
                     📞 Audio Call
+                    <span style={{color: '#007bff', fontWeight: 500, marginLeft: '0.5rem', fontSize: '0.98rem'}}>
+                      {engineer.audioRate ? engineer.audioRate : engineer.hourlyRate}
+                    </span>
                   </label>
                 </div>
               </div>
@@ -810,4 +887,4 @@ function EngineerProfile() {
   );
 }
 
-export default EngineerProfile; 
+export default EngineerProfile;

@@ -3,6 +3,7 @@ import UserAvatar from '../components/UserAvatar';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import './Styles/HomeSectionReveal.css';
+import './Styles/AccountDropdown.css';
 
 function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -78,7 +79,11 @@ function Home() {
             <a href="#about" className="nav-link">About Us</a>
             <Link to="/products" className="nav-link">Products</Link>
             <Link to="/engineers" className="nav-link">Engineers</Link>
-            <a href="#rating" className="nav-link">Reviews</a>
+              <a href="#rating" className="nav-link">Reviews</a>
+              <Link to="/cart" className="nav-link" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <span role="img" aria-label="cart" style={{ fontSize: '1.2em' }}>🛒</span>
+                Cart
+              </Link>
             <a href="#contact" className="nav-link">Contact</a>
             {!user && <><Link to="/login" className="nav-link">Login</Link><Link to="/signup" className="nav-link">Sign Up</Link></>}
             {/* User avatar at right corner, only if logged in */}
@@ -92,23 +97,28 @@ function Home() {
                   <UserAvatar name={user.name} imageUrl={user.avatar} size={40} />
                 </button>
                 {avatarMenuOpen && (
-                  <div
-                    style={{
-                      position: 'absolute',
-                      top: '48px',
-                      right: 0,
-                      background: '#fff',
-                      borderRadius: '10px',
-                      boxShadow: '0 4px 16px rgba(44,62,80,0.12)',
-                      minWidth: '140px',
-                      zIndex: 100,
-                      padding: '0.5rem 0',
-                    }}
-                    onMouseLeave={handleMenuClose}
-                  >
-                    <button style={{ display: 'block', width: '100%', padding: '0.5rem 1rem', background: 'none', border: 'none', color: '#232f3e', fontWeight: 500, textAlign: 'left', cursor: 'pointer' }} onClick={() => { handleMenuClose(); navigate('/profile'); }}>Profile</button>
-                    <Link to="/settings" style={{ display: 'block', padding: '0.5rem 1rem', color: '#232f3e', textDecoration: 'none', fontWeight: 500 }}>Settings</Link>
-                    <button style={{ display: 'block', width: '100%', padding: '0.5rem 1rem', background: 'none', border: 'none', color: '#b00020', fontWeight: 500, textAlign: 'left', cursor: 'pointer' }} onClick={handleLogout}>Logout</button>
+                  <div className="account-dropdown" onMouseLeave={handleMenuClose}>
+                    <button
+                      className="account-dropdown-item"
+                      onClick={() => { handleMenuClose(); navigate('/profile'); }}
+                      tabIndex={0}
+                    >
+                      Profile
+                    </button>
+                    <button
+                      className="account-dropdown-item"
+                      onClick={() => { handleMenuClose(); navigate('/settings'); }}
+                      tabIndex={0}
+                    >
+                      Settings
+                    </button>
+                    <button
+                      className="account-dropdown-item"
+                      onClick={handleLogout}
+                      tabIndex={0}
+                    >
+                      Logout
+                    </button>
                   </div>
                 )}
               </div>

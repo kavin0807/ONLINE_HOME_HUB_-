@@ -5,11 +5,11 @@ import './Styles/ProductPurchase.css';
 function ProductPurchase() {
   const location = useLocation();
   const product = location.state?.product;
+  const meeting = location.state?.meeting;
 
-  // Fallback if user refreshes or comes directly
+  // Fallback for product purchase
   const persisted = product || JSON.parse(sessionStorage.getItem('lastProduct') || 'null');
-  if (!product && persisted) {
-    // Rehydrate location.state for consistent rendering without redirect
+  if (!product && persisted && !meeting) {
     location.state = { product: persisted };
   }
 
@@ -24,7 +24,6 @@ function ProductPurchase() {
   }, []);
   // ...existing code...
   if (!currentUser) {
-    // If no user, show quick prompt to login
     return (
       <div className="purchase-page-bg">
         <div className="purchase-container">
@@ -44,31 +43,64 @@ function ProductPurchase() {
   const [buyer, setBuyer] = useState({ name: '', email: '', phone: '', address: '' });
   const [paymentMethod, setPaymentMethod] = useState('card');
   const summary = useMemo(() => {
-    if (!product) return null;
-    const subtotal = product.totalPrice ?? (product.unitPrice ?? 0) * (product.quantity ?? 1);
-    const shipping = subtotal > 10000 ? 0 : 199; // simple shipping rule
-    const tax = Math.round(subtotal * 0.18); // 18% GST example
-    const grandTotal = subtotal + shipping + tax;
-    return { subtotal, shipping, tax, grandTotal };
-  }, [product]);
+    if (product) {
+      const subtotal = product.totalPrice ?? (product.unitPrice ?? 0) * (product.quantity ?? 1);
+      const shipping = subtotal > 10000 ? 0 : 199;
+      const tax = Math.round(subtotal * 0.18);
+      const grandTotal = subtotal + shipping + tax;
+      return { subtotal, shipping, tax, grandTotal };
+    }
+    if (meeting) {
+      // Parse rate as number (strip ₹ and /hour)
+      let rateNum = 0;
+      if (meeting.rate) {
+        rateNum = Number(meeting.rate.replace(/[^\d]/g, ''));
+      }
+      // No shipping/tax for meeting
+      return { subtotal: rateNum, shipping: 0, tax: 0, grandTotal: rateNum };
+    }
+    return null;
+  }, [product, meeting]);
   // ...existing code...
   const handlePlaceOrder = (e) => {
     e.preventDefault();
-    if (!product) return;
-    // Build order object
-    const order = {
-      id: Date.now(),
-      product: product.name,
-      brand: product.selectedBrand,
-      quantity: product.quantity,
-      unit: product.unit,
-      color: product.selectedColor,
-      price: summary?.grandTotal,
-      date: new Date().toISOString().slice(0, 10),
-      buyer,
-      paymentMethod,
-      status: 'Confirmed',
-    };
+    let order;
+    if (product) {
+      order = {
+        id: Date.now(),
+        type: 'product',
+        product: product.name,
+        brand: product.selectedBrand,
+        quantity: product.quantity,
+        unit: product.unit,
+        color: product.selectedColor,
+        price: summary?.grandTotal,
+        date: new Date().toISOString().slice(0, 10),
+        buyer,
+        paymentMethod,
+        status: 'Confirmed',
+      };
+    } else if (meeting) {
+      order = {
+        id: Date.now(),
+        type: 'meeting',
+        engineerId: meeting.engineerId,
+        engineerName: meeting.engineerName,
+        engineerTitle: meeting.engineerTitle,
+        engineerImage: meeting.engineerImage,
+        meetingType: meeting.meetingType,
+        rate: meeting.rate,
+        date: meeting.date,
+        time: meeting.time,
+        projectDetails: meeting.projectDetails,
+        price: summary?.grandTotal,
+        buyer,
+        paymentMethod,
+        status: 'Confirmed',
+      };
+    } else {
+      return;
+    }
     // Get current user
     const raw = localStorage.getItem('currentUser');
     if (!raw) return;
@@ -85,7 +117,15 @@ function ProductPurchase() {
     <div className="purchase-page-bg">
       <div className="purchase-container">
         <header className="purchase-header">
-          <h1 className="purchase-title">{product ? 'Checkout' : 'Product Purchase'}</h1>
+          <h1 className="purchase-title">{meeting ? 'Engineer Meeting Checkout' : (product ? 'Checkout' : 'Product Purchase')}</h1>
+          {meeting && (
+            <div className="purchase-contact">
+              <span>Engineer: {meeting.engineerName}</span>
+              <span>Type: {meeting.meetingType === 'video' ? 'Video Call' : 'Audio Call'}</span>
+              <span>Date: {meeting.date}</span>
+              <span>Time: {meeting.time}</span>
+            </div>
+          )}
           {product && (
             <div className="purchase-contact">
               <span>Item: {product.name}</span>
@@ -96,21 +136,27 @@ function ProductPurchase() {
         </header>
         <div className="purchase-main">
           <div className="purchase-image-section">
-            <img src={product ? product.image : '/images/products/exterior/Exterior Paint.webp'} alt="Product" className="purchase-main-img" />
+            {meeting ? (
+              <img src={meeting.engineerImage && !/^\s*\p{Emoji}/u.test(meeting.engineerImage) ? meeting.engineerImage : '/images/products/default.jpg'} alt="Engineer" className="purchase-main-img" />
+            ) : (
+              <img src={product ? product.image : '/images/products/exterior/Exterior Paint.webp'} alt="Product" className="purchase-main-img" />
+            )}
           </div>
           <div className="purchase-details-section">
             {/* Payment + Buyer section */}
             <div className="purchase-review-section">
               <div className="badge-secure">🔒 Secure Checkout</div>
-              <h3>Billing & Shipping</h3>
+              <h3>{meeting ? 'Your Details' : 'Billing & Shipping'}</h3>
               <form className="purchase-review-form" onSubmit={handlePlaceOrder}>
                 <div className="form-grid">
                   <input value={buyer.name} onChange={e=>setBuyer({...buyer,name:e.target.value})} type="text" placeholder="Full Name" required />
                   <input value={buyer.email} onChange={e=>setBuyer({...buyer,email:e.target.value})} type="email" placeholder="Email" required />
                   <input value={buyer.phone} onChange={e=>setBuyer({...buyer,phone:e.target.value})} type="tel" placeholder="Phone" required />
-                  <input type="text" placeholder="Pincode" />
+                  {!meeting && <input type="text" placeholder="Pincode" />}
                 </div>
-                <textarea value={buyer.address} onChange={e=>setBuyer({...buyer,address:e.target.value})} placeholder="Shipping Address" rows={3} required />
+                {!meeting && (
+                  <textarea value={buyer.address} onChange={e=>setBuyer({...buyer,address:e.target.value})} placeholder="Shipping Address" rows={3} required />
+                )}
 
                 <div className="payment-methods">
                   <div className={`pm-card${paymentMethod==='card' ? ' selected' : ''}`} onClick={()=>setPaymentMethod('card')}>
@@ -128,11 +174,14 @@ function ProductPurchase() {
                     <div className="pm-title">NetBanking</div>
                     <div className="pm-sub">Popular Indian Banks</div>
                   </div>
-                  <div className={`pm-card${paymentMethod==='cod' ? ' selected' : ''}`} onClick={()=>setPaymentMethod('cod')}>
-                    <div className="pm-icon">📦</div>
-                    <div className="pm-title">Cash on Delivery</div>
-                    <div className="pm-sub">Pay at doorstep</div>
-                  </div>
+                  {/* Hide COD for engineer meeting */}
+                  {!meeting && (
+                    <div className={`pm-card${paymentMethod==='cod' ? ' selected' : ''}`} onClick={()=>setPaymentMethod('cod')}>
+                      <div className="pm-icon">📦</div>
+                      <div className="pm-title">Cash on Delivery</div>
+                      <div className="pm-sub">Pay at doorstep</div>
+                    </div>
+                  )}
                 </div>
 
                 {paymentMethod==='card' && (
@@ -148,9 +197,18 @@ function ProductPurchase() {
                       <input type="text" placeholder="UPI ID (e.g. name@bank)" required />
                     </div>
                     <div className="radio-line">
-                      <label><input type="radio" name="upi_app" defaultChecked /> GPay</label>
-                      <label><input type="radio" name="upi_app" /> PhonePe</label>
-                      <label><input type="radio" name="upi_app" /> Paytm</label>
+                      <label style={{display:'flex',alignItems:'center',gap:'0.5rem',padding:'0.25rem 0'}}>
+                        <input type="radio" name="upi_app" defaultChecked style={{marginRight:'0.5rem'}} />
+                        <img src="/images/Google_Pay_icon.svg" alt="GPay" style={{height:'48px',width:'auto',objectFit:'contain',background:'#fff',borderRadius:'8px',boxShadow:'0 1px 4px #0001',padding:'4px 14px',maxWidth:'140px'}} />
+                      </label>
+                      <label style={{display:'flex',alignItems:'center',gap:'0.5rem',padding:'0.25rem 0'}}>
+                        <input type="radio" name="upi_app" style={{marginRight:'0.5rem'}} />
+                        <img src="/images/phone-pay-logo.jpg" alt="PhonePe" style={{height:'48px',width:'auto',objectFit:'contain',background:'#fff',borderRadius:'8px',boxShadow:'0 1px 4px #0001',padding:'4px 14px',maxWidth:'140px'}} />
+                      </label>
+                      <label style={{display:'flex',alignItems:'center',gap:'0.5rem',padding:'0.25rem 0'}}>
+                        <input type="radio" name="upi_app" style={{marginRight:'0.5rem'}} />
+                        <img src="/images/paytm-logo.png" alt="Paytm" style={{height:'48px',width:'auto',objectFit:'contain',background:'#fff',borderRadius:'8px',boxShadow:'0 1px 4px #0001',padding:'4px 14px',maxWidth:'140px'}} />
+                      </label>
                     </div>
                   </>
                 )}
@@ -170,7 +228,7 @@ function ProductPurchase() {
                 )}
 
                 <button type="submit" className="purchase-submit-btn" style={{marginTop:'1rem'}}>
-                  Place Order
+                  {meeting ? 'Book Meeting' : 'Place Order'}
                 </button>
               </form>
             </div>
@@ -178,7 +236,19 @@ function ProductPurchase() {
             {/* Order summary */}
             <div className="purchase-desc order-summary-card">
               <h2>Order Summary</h2>
-              {product ? (
+              {meeting ? (
+                <div style={{marginTop: '0.75rem'}}>
+                  <div><strong>{meeting.engineerName}</strong></div>
+                  <div className="muted">{meeting.engineerTitle}</div>
+                  <div className="muted">Type: {meeting.meetingType === 'video' ? 'Video Call' : 'Audio Call'}</div>
+                  <div className="muted">Date: {meeting.date}</div>
+                  <div className="muted">Time: {meeting.time}</div>
+                  <div className="muted">Project: {meeting.projectDetails}</div>
+                  <div className="line"></div>
+                  <div>Rate: {meeting.rate}</div>
+                  <div className="grand">Total: ₹{summary?.grandTotal ?? '-'}</div>
+                </div>
+              ) : product ? (
                 <div style={{marginTop: '0.75rem'}}>
                   <div><strong>{product.name}</strong></div>
                   <div className="muted">Brand: {product.selectedBrand}</div>

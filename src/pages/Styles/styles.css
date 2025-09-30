@@ -1,0 +1,41 @@
+/* ...existing code... */
+
+.brand-icons {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin: 16px 0;
+}
+
+.brand-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  border: 2px solid #e0e0e0;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(80, 80, 80, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.brand-icon img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.brand-icon.selected {
+  border: 2.5px solid #7c3aed;
+  box-shadow: 0 4px 16px rgba(124, 58, 237, 0.12);
+}
+
+.brand-icon:hover {
+  border: 2.5px solid #a78bfa;
+  box-shadow: 0 4px 16px rgba(124, 58, 237, 0.18);
+}
+
+/* ...existing code... */

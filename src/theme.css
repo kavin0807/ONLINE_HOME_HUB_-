@@ -1,15 +1,1 @@
-/* Minimal animations only (theme removed) */
-
-/* Subtle animated gradient line under section titles */
-.section-underline {
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #00e5ff, #ff3d81, transparent);
-  filter: blur(0.2px);
-  background-size: 200% 100%;
-  animation: flow 3s linear infinite;
-}
-
-@keyframes flow {
-  0% { background-position: 0 0; }
-  100% { background-position: 200% 0; }
-}
+@import './pages/Styles/theme.css';

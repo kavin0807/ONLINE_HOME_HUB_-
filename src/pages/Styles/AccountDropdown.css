@@ -1,0 +1,43 @@
+/* Account dropdown menu styles - rich and royal look */
+.account-dropdown {
+	position: absolute;
+	top: 48px;
+	right: 0;
+	background: #fff;
+	border-radius: 16px;
+	box-shadow: 0 4px 24px 0 rgba(44,62,80,0.16);
+	min-width: 180px;
+	z-index: 100;
+	padding: 0.5rem 0;
+	overflow: hidden;
+	border: 1.5px solid #e5e0dc;
+}
+.account-dropdown-item {
+	display: block;
+	width: 100%;
+	min-width: 180px;
+	min-height: 48px;
+	padding: 1.1rem 1.4rem;
+	background: #f7f4f2 !important;
+	border: none !important;
+	color: #3b2e2a !important;
+	font-weight: 600;
+	text-align: left;
+	cursor: pointer;
+	font-size: 1.13rem;
+	border-bottom: 1.5px solid #ede7e3;
+	transition: background 0.18s, color 0.18s;
+	text-decoration: none;
+	outline: none;
+	letter-spacing: 0.01em;
+	box-sizing: border-box;
+}
+.account-dropdown-item:last-child {
+	border-bottom: none;
+	border-top: 1.5px solid #ede7e3;
+}
+.account-dropdown-item:hover,
+.account-dropdown-item:focus {
+	background: #e0dbd6 !important;
+	color: #3b2e2a !important;
+}
